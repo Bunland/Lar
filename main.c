@@ -5,6 +5,7 @@
 
 void Apis(JSContextRef context, JSObjectRef globalObject) {
     createCustomFunction(context, globalObject, "Add", Add);
+    createCustomFunction(context, globalObject, "Mult", Mult);
 }
 
 int main(int argc, char *argv[]) {
