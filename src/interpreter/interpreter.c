@@ -2,51 +2,6 @@
 #include <stdlib.h>
 #include <JavaScriptCore/JavaScript.h>
 
-
-// function to create a custom Javascript function
-void createCustomFunction(JSContextRef context, JSObjectRef globalObject, const char * functionName, JSObjectCallAsFunctionCallback funcionCallback) {
-    JSStringRef functionString = JSStringCreateWithUTF8CString(functionName);
-
-    JSObjectRef functionObject = JSObjectMakeFunctionWithCallback(context, functionString, funcionCallback);
-
-    JSObjectSetProperty(context ,globalObject, functionString, functionObject, kJSPropertyAttributeNone, NULL);
-
-    // Free string
-    JSStringRelease(functionString);
-}
-
- // callback function for adding two numbers in javascript
-JSValueRef Add(JSContextRef context, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* execption) {
-    if(argumentCount < 2 || arguments == NULL) {
-        fprintf(stderr, "The function requires 2 arguments.\n");
-        return JSValueMakeUndefined(context);
-    }
-
-    int numa = JSValueToNumber(context, arguments[0], NULL);
-    int numb = JSValueToNumber(context, arguments[1], NULL);
-
-    int add = numa + numb;
-    printf("%d\n", add);
-
-    return JSValueMakeNumber(context, add);
-}
-
-JSValueRef Mult(JSContextRef context, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* execption) {
-    if(argumentCount < 2 || arguments == NULL) {
-        fprintf(stderr, "The function requires 2 arguments.\n");
-        return JSValueMakeUndefined(context);
-    }
-
-    int numa = JSValueToNumber(context, arguments[0], NULL);
-    int numb = JSValueToNumber(context, arguments[1], NULL);
-
-    int mult = numa * numb;
-    printf("%d\n", mult);
-
-    return JSValueMakeNumber(context, mult);
-}
-
-
 char * readScript(const char * filename) {
     FILE * file = fopen(filename, "r");
 
@@ -65,20 +20,9 @@ char * readScript(const char * filename) {
     return buffer;
 }
 
-int main () {
-    JSGlobalContextRef context = JSGlobalContextCreate(NULL);
-    JSObjectRef globalObject = JSContextGetGlobalObject(context);
+void interpreter (char * filename, JSContextRef context, JSObjectRef globalObject) {
 
-    const char* filename = "index.js";
     char * fileContent = readScript(filename);
-
-    if(fileContent == NULL) {
-        return 1;
-    }
-
-    // create and register custom javascript function
-    createCustomFunction(context, globalObject, "Add", Add);
-    createCustomFunction(context, globalObject, "Mult", Mult);
 
     JSStringRef jsCode = JSStringCreateWithUTF8CString(fileContent);
     JSValueRef result = JSEvaluateScript(context, jsCode, NULL, NULL, 0, NULL);
@@ -94,6 +38,4 @@ int main () {
     free(str);
     free(fileContent);
     JSStringRelease(jsString);
-    JSGlobalContextRelease(context);
-    return 0;
 }
