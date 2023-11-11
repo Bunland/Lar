@@ -36,8 +36,6 @@ JSValueRef Require(JSContextRef context, JSObjectRef function, JSObjectRef thisO
     return JSValueMakeUndefined(context);
 }
 
-
-
 void requireFunction(JSContextRef context, JSObjectRef globalObject) { 
     JSStringRef requireName = JSStringCreateWithUTF8CString("require");
     JSObjectRef requireFunctionObject = JSObjectMakeFunctionWithCallback(context, requireName, Require);
