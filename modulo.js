@@ -1,4 +1,4 @@
 
-let some = 2 + 5;
+let some = "hello";
 
 exports = {rs: some}
