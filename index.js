@@ -1,6 +1,32 @@
-var {rs} = require('modulo.js');
-console.log(rs + 2 ); // Debería imprimir: Hola desde el módulo
+// var {rs} = require('modulo.js');
 
+
+const arr = [
+    {
+        id: 1,
+        name: "lucas",
+        email: "lucas@gmail.com"
+    },
+    {
+        id: 2,
+        name: "martin",
+        email: "martin@gmail.com"
+    }
+];
+
+const mappedArray = arr.map(item => {
+    return {
+        ...item,
+        uppercaseName: item.name.toUpperCase()
+    };
+});
+
+// Utiliza JSON.stringify para imprimir los objetos de manera legible
+console.log(JSON.stringify(mappedArray, null, 2));
+
+
+
+// console.log(JSON.stringify(arr)); 
 
 
 // let objec = []
