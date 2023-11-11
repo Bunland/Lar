@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <JavaScriptCore/JavaScript.h>
 
-JSValueRef Add(JSContextRef context, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* execption) {
+JSValueRef Add(JSContextRef context, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception) {
     if(argumentCount < 2 || arguments == NULL) {
         fprintf(stderr, "The function requires 2 arguments.\n");
         return JSValueMakeUndefined(context);
@@ -17,7 +17,7 @@ JSValueRef Add(JSContextRef context, JSObjectRef function, JSObjectRef thisObjec
     return JSValueMakeNumber(context, add);
 }
 
-JSValueRef Mult(JSContextRef context, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* execption) {
+JSValueRef Mult(JSContextRef context, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception) {
     if(argumentCount < 2 || arguments == NULL) {
         fprintf(stderr, "The function requires 2 arguments.\n");
         return JSValueMakeUndefined(context);
