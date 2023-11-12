@@ -30,14 +30,10 @@ JSValueRef Require(JSContextRef context, JSObjectRef function, JSObjectRef thisO
         JSStringRelease(exportName);
 
         return exportValue;
-
     }
 
     return JSValueMakeUndefined(context);
 }
-
-
-
 
 void requireFunction(JSContextRef context, JSObjectRef globaObject) { 
     JSStringRef requireName = JSStringCreateWithUTF8CString("require");
