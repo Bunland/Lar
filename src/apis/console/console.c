@@ -26,5 +26,6 @@ void consoleLogFunction(JSContextRef context, JSObjectRef globaObject) {
     JSObjectSetProperty(context, consoleObject, logFunctionName, logFunctionObject, kJSPropertyAttributeNone, NULL);
 
     JSStringRelease(consoleName);
+    JSStringRelease(logFunctionName);
 
 }

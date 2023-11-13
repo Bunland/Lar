@@ -27,7 +27,9 @@ void interpreter (char * filename, JSContextRef context, JSObjectRef globalObjec
 
     JSStringRef jsCode = JSStringCreateWithUTF8CString(fileContent);
     JSValueRef exception = NULL;
-    JSValueRef result = JSEvaluateScript(context, jsCode, NULL, NULL, 0, &exception);
+    // JSValueRef result = JSEvaluateScript(context, jsCode, NULL, NULL, 0, &exception);
+    JSEvaluateScript(context, jsCode, NULL, NULL, 0, &exception);
+
 
     if (exception) {
         // Obtener el tamaño del buffer necesario
@@ -42,15 +44,15 @@ void interpreter (char * filename, JSContextRef context, JSObjectRef globalObjec
     }
 
 
-    JSStringRef jsString = JSValueToStringCopy(context, result, NULL);
+    // JSStringRef jsString = JSValueToStringCopy(context, result, NULL);
 
-    size_t bufferSize = JSStringGetMaximumUTF8CStringSize(jsString);
-    char * str = (char *)malloc(bufferSize);
-    JSStringGetUTF8CString(jsString, str, bufferSize);
+    // size_t bufferSize = JSStringGetMaximumUTF8CStringSize(jsString);
+    // char * str = (char *)malloc(bufferSize);
+    // JSStringGetUTF8CString(jsString, str, bufferSize);
 
-    // printf("%s\n", str);
+    //  printf("%s\n", str);
 
-    free(str);
-    free(fileContent);
-    JSStringRelease(jsString);
+    // free(str);
+    // free(fileContent);
+    // JSStringRelease(jsString);
 }
