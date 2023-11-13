@@ -1,7 +1,15 @@
-// const result = require("./module.js");
+const obj = require("./module.js");
 
-// console.log("some")
-// console.log(result.sum);
+// const file = JSON.parse(lar.readFile("some.json"));
+// 
+// if (obj.file && typeof obj.file == "object") {
+    // file.map((e) => {
+    // console.log(JSON.stringify(e.id));
+  // });
+// }
+
+// lar.write('file.txt', JSON.stringify(obj.file));
+lar.remove("file.txt")
 
 
-console.log(lar.exists("file.txt"));
+// console.log(JSON.stringify(obj.file))

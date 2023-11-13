@@ -26,22 +26,22 @@ JSValueRef Exist(JSContextRef context, JSObjectRef function, JSObjectRef thisObj
     JSStringGetUTF8CString(filename, fileNameCStr, buffserSize);
 
     bool result = fileExists(fileNameCStr);
+
+    free(fileNameCStr);
+    JSStringRelease(filename);
     return JSValueMakeBoolean(context, result);
 }
 
 
-void existsFunction(JSContextRef context, JSObjectRef globalObject) {
-    JSStringRef existsName = JSStringCreateWithUTF8CString("lar");
-    JSObjectRef existsObject = JSObjectMake(context, NULL, NULL);
-    JSObjectSetProperty(context, globalObject, existsName, existsObject, kJSClassAttributeNone, NULL);
+// void existsFunction(JSContextRef context, JSObjectRef globalObject) {
+//     JSStringRef existsName = JSStringCreateWithUTF8CString("lar");
+//     JSObjectRef existsObject = JSObjectMake(context, NULL, NULL);
+//     JSObjectSetProperty(context, globalObject, existsName, existsObject, kJSClassAttributeNone, NULL);
 
-    JSStringRef existsFunction = JSStringCreateWithUTF8CString("exists");
-    JSObjectRef existsFuntionObject = JSObjectMakeFunctionWithCallback(context, existsFunction, Exist);
-    JSObjectSetProperty(context, existsObject, existsFunction, existsFuntionObject, kJSClassAttributeNone, NULL);
+//     JSStringRef existsFunction = JSStringCreateWithUTF8CString("exists");
+//     JSObjectRef existsFuntionObject = JSObjectMakeFunctionWithCallback(context, existsFunction, Exist);
+//     JSObjectSetProperty(context, existsObject, existsFunction, existsFuntionObject, kJSClassAttributeNone, NULL);
 
-    JSStringRelease(existsName);
-    JSStringRelease(existsFunction);
-
-
-
-}
+//     JSStringRelease(existsName);
+//     JSStringRelease(existsFunction);
+// }
