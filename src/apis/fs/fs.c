@@ -24,11 +24,9 @@ void fsFunction(JSContextRef context, JSObjectRef globalObject) {
     JSObjectRef writeFileFuntionObject = JSObjectMakeFunctionWithCallback(context, writeFileFunction, Write);
     JSObjectSetProperty(context, fsGlobalObject, writeFileFunction, writeFileFuntionObject, kJSClassAttributeNone, NULL);
 
-
     JSStringRelease(fsName);
     JSStringRelease(existsFunction);
     JSStringRelease(readFileFunction);
     JSStringRelease(removeFileFunction);   
     JSStringRelease(writeFileFunction);   
-
 }
