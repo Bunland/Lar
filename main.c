@@ -9,6 +9,7 @@ void Apis(JSContextRef context, JSObjectRef globalObject) {
     consoleLogFunction(context, globalObject);
 
     requireFunction(context, globalObject);
+    existsFunction(context, globalObject);
 
 }
 
