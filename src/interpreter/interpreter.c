@@ -21,7 +21,9 @@ void interpreter(char *filename, JSContextRef context, JSObjectRef globalObject)
 
     // Evaluate the JavaScript code.
     JSValueRef exception = NULL;
-    JSEvaluateScript(context, jsCode, NULL, NULL, 0, &exception);
+    JSValueRef result =  JSEvaluateScript(context, jsCode, NULL, NULL, 1, &exception);
+    // JSValueRef result = JSEvaluateScript(context, scriptStr, NULL, NULL, 1, NULL);
+
 
     // Check if an exception occurred during evaluation.
     if (exception) {
@@ -35,6 +37,19 @@ void interpreter(char *filename, JSContextRef context, JSObjectRef globalObject)
         // Print the error message.
         printf("%s\n", buffer);
     }
+
+    // Imprimir el resultado (debería ser un objeto JavaScript)
+    // JSStringRef resultStr = JSValueCreateJSONString(context, result, 0, NULL);
+    // size_t bufferSize = JSStringGetMaximumUTF8CStringSize(resultStr);
+    // char* buffer = (char*)malloc(bufferSize);
+    // JSStringGetUTF8CString(resultStr, buffer, bufferSize);
+    // printf("JSON Result: %s\n", buffer);
+
+    // // Liberar recursos
+    // free(buffer);
+    // JSStringRelease(resultStr);
+    // JSGlobalContextRelease(context);
+
 
     // Release the allocated resources.
     JSStringRelease(jsCode);

@@ -53,11 +53,27 @@ JSValueRef Write(JSContextRef context, JSObjectRef function, JSObjectRef thisObj
     JSStringRef filename = JSValueToStringCopy(context, arguments[0], exception);
     size_t bufferSize = JSStringGetMaximumUTF8CStringSize(filename);
     char * fileNameCStr = (char*)malloc(bufferSize);
+
+    if (fileNameCStr == NULL) {
+    // Error handling: Unable to allocate memory for fileNameCStr
+        JSStringRelease(filename);  // Free memory before exiting
+        perror("Error allocating memory for fileNameCStr");
+        exit(EXIT_FAILURE);
+    }
+
     JSStringGetUTF8CString(filename, fileNameCStr, bufferSize);
 
     JSStringRef filecontent = JSValueToStringCopy(context, arguments[1], exception);
     size_t bufferContentSize = JSStringGetMaximumUTF8CStringSize(filecontent);
     char * fileContentCStr = (char*)malloc(bufferContentSize);
+    if (fileContentCStr == NULL) {
+        // Error handling: Unable to allocate memory for fileContentCStr
+        free(fileNameCStr);  // Free memory before exiting
+        JSStringRelease(filecontent);  // Free memory before exiting
+        perror("Error allocating memory for fileContentCStr");
+        exit(EXIT_FAILURE);
+    }
+
     JSStringGetUTF8CString(filecontent, fileContentCStr, bufferContentSize);
 
     // Write content to the file using the write function.

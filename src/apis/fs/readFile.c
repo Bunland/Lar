@@ -61,6 +61,12 @@ JSValueRef ReadFile(JSContextRef context, JSObjectRef function, JSObjectRef this
     JSStringRef filename = JSValueToStringCopy(context, arguments[0], exception);
     size_t bufferSize = JSStringGetMaximumUTF8CStringSize(filename);
     char * fileNameCStr = (char*)malloc(bufferSize);
+    if (fileNameCStr == NULL) {
+        // Error handling: Unable to allocate memory for fileNameCStr
+        JSStringRelease(filename);  // Free memory before exiting
+        perror("Error allocating memory for fileNameCStr");
+        exit(EXIT_FAILURE);
+    }
     JSStringGetUTF8CString(filename, fileNameCStr, bufferSize);
 
     // Read the contents of the file using the readFile function.
