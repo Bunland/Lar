@@ -45,6 +45,12 @@ JSValueRef Exist(JSContextRef context, JSObjectRef function, JSObjectRef thisObj
     JSStringRef filename = JSValueToStringCopy(context, arguments[0], exception);
     size_t bufferSize = JSStringGetMaximumUTF8CStringSize(filename);
     char * fileNameCStr = (char*)malloc(bufferSize);
+    if (fileNameCStr == NULL) {
+        // Error handling: Unable to allocate memory for fileNameCStr
+        JSStringRelease(filename);  // Free memory before exiting
+        perror("Error allocating memory for fileNameCStr");
+        exit(EXIT_FAILURE);
+    }
     JSStringGetUTF8CString(filename, fileNameCStr, bufferSize);
 
     // Check if the file exists using the fileExists function.
